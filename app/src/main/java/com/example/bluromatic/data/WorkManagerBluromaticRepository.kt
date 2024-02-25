@@ -17,7 +17,9 @@
 package com.example.bluromatic.data
 
 import android.content.Context
+import androidx.work.Constraints
 import android.net.Uri
+//import androidx.compose.ui.unit.Constraints
 import androidx.lifecycle.asFlow
 import androidx.work.Data
 import androidx.work.ExistingWorkPolicy
@@ -61,11 +63,21 @@ class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
                 OneTimeWorkRequest.Companion.from(CleanupWorker::class.java)
             )
 
+        // restriccion "requiere que no tenga bateria baja"
+        val constraints = Constraints.Builder()
+            .setRequiresBatteryNotLow(true)
+            .build()
+
         // Add WorkRequest to blur the image
         val blurBuilder = OneTimeWorkRequestBuilder<BlurWorker>()
 
         // Input the Uri for the blur operation along with the blur level
         blurBuilder.setInputData(createInputDataForWorkRequest(blurLevel, imageUri))
+            .setConstraints(constraints)
+
+        // o intentar el codigo de abajo
+        //blurBuilder.setConstraints(constraints)
+
 
         continuation = continuation.then(blurBuilder.build())
 
