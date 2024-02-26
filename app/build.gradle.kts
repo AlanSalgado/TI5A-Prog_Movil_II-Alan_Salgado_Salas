@@ -83,6 +83,11 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:${rootProject.extra["lifecycle_version"]}")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:${rootProject.extra["lifecycle_version"]}")
     implementation("androidx.work:work-runtime-ktx:2.8.1")
+    implementation("androidx.test:core-ktx:1.5.0")
+    implementation("androidx.work:work-testing:2.9.0")
+    implementation("junit:junit:4.12")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     debugImplementation("androidx.compose.ui:ui-tooling")
+
+
 }
